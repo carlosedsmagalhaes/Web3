@@ -6,12 +6,14 @@ const prisma = new PrismaClient();
 class CarroController {
   createCarro = async (req: Request, res: Response) => {
     const { modelo, marca, ano } = req.body;
+    const anoInt:number = Number(ano);
+    
     try {
       const carro = await prisma.carro.create({
         data: {
           modelo,
           marca,
-          ano,
+          ano: anoInt,
         },
       });
 

@@ -13,7 +13,7 @@ class CarroPessoaController {
           .json({ error: "ID da pessoa e do carro são obrigatórios" });
       }
 
-      const carroPessoa = await prisma.carroPessoa.create({
+      const carroPessoa = await prisma.pessoaPorCarro.create({
         data: {
           pessoaId,
           carroId,
@@ -31,7 +31,7 @@ class CarroPessoaController {
 
   getPessoasCarros = async (req: Request, res: Response) => {
     try {
-      const pessoasCarros = await prisma.carroPessoa.findMany({
+      const pessoasCarros = await prisma.pessoaPorCarro.findMany({
         include: {
           pessoa: true,
           carro: true,
@@ -49,7 +49,7 @@ class CarroPessoaController {
   deletePessoaCarro = async (req: Request, res: Response) => {
     const { id } = req.params;
     try {
-      const carroPessoa = await prisma.carroPessoa.delete({
+      const carroPessoa = await prisma.pessoaPorCarro.delete({
         where: { id: Number(id) },
       });
 
