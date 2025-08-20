@@ -55,11 +55,12 @@ class CarroController {
   putCarro = async (req: Request, res: Response) => {
     const { id } = req.params;
     const { modelo, marca, ano } = req.body;
+    const anoInt:number = Number(ano);
 
     try {
       const carro = await prisma.carro.update({
         where: { id: Number(id) },
-        data: { modelo, marca, ano },
+        data: { modelo, marca, ano:anoInt },
       });
 
       res.status(200).json(carro);
@@ -73,6 +74,14 @@ class CarroController {
     const { id } = req.params;
 
     try {
+      const carroPessoa = await prisma.pessoaPorCarro.findFirst({
+        where: { carroId: Number(id) },
+      });
+      
+      if (carroPessoa) {
+        return res.status(400).json({ error: "Não é possível deletar o carro pois ele está associado a uma pessoa." });
+      }
+
       await prisma.carro.delete({
         where: { id: Number(id) },
       });

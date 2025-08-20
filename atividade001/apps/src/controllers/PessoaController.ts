@@ -71,9 +71,22 @@ class PessoaController {
   deletePessoa = async (req: Request, res: Response) => {
     const { id } = req.params;
     try {
+
+      const pessoasCarros = await prisma.pessoaPorCarro.findFirst({
+        where: { pessoaId: Number(id) },
+      });
+
+      if (pessoasCarros) {
+        return res
+          .status(400)
+          .json({ error: "Não é possível deletar pessoa associada a um carro" });
+      }
+
       const pessoa = await prisma.pessoa.delete({
         where: { id: Number(id) },
       });
+
+      res.status(200).json(pessoa);
     } catch (error) {
       console.error("Erro ao deletar pessoa:", error);
       res.status(500).json({ error: "Erro ao deletar pessoa" });

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerenciador de Pessoas e Carros</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>📈 Gerenciador de Pessoas e Carros</h1>
+    <nav>
+      <button data-target="carFormContainer">Carros</button>
+      <button data-target="pessoaFormContainer">Pessoas</button>
+      <button data-target="pessoaCarroFormContainer">Relacionamentos</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="carFormContainer" class="form-section">
+      <h2>🚗 Carros</h2>
+      <form id="carForm">
+        <input type="text" id="modelo" placeholder="Modelo" required>
+        <input type="text" id="marca" placeholder="Marca" required>
+        <input type="number" id="ano" placeholder="Ano" required>
+        <button type="submit">Adicionar</button>
+      </form>
+      <ul id="carList"></ul>
+    </section>
+
+    <section id="pessoaFormContainer" class="form-section hidden">
+      <h2>👥 Pessoas</h2>
+      <form id="pessoaForm">
+        <input type="text" id="nome" placeholder="Nome" required>
+        <input type="email" id="email" placeholder="Email" required>
+        <button type="submit">Adicionar</button>
+      </form>
+      <ul id="pessoaList"></ul>
+    </section>
+
+    <section id="pessoaCarroFormContainer" class="form-section hidden">
+      <h2>🔗 Pessoas por Carro</h2>
+      <form id="pessoaCarroForm">
+        <select id="selectPessoa" required></select>
+        <select id="selectCarro" required></select>
+        <button type="submit">Adicionar</button>
+      </form>
+      <ul id="pessoaCarroList"></ul>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

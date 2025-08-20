@@ -1,20 +1,49 @@
-/* ======= Estilo Geral ======= */
+:root {
+  --primary: #6f42c1;
+  --primary-dark: #532d8c;
+  --secondary: #d6c1f0;
+  --bg: #f3f0fa;
+  --text: #333;
+  --btn-hover: #4b1f99;
+}
+
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  max-width: 800px;
+  max-width: 900px;
   margin: auto;
   padding: 20px;
-  background: linear-gradient(135deg, #f0f4ff, #d9e6ff);
-  color: #333;
+  background: var(--bg);
+  color: var(--text);
 }
 
 h1 {
   text-align: center;
-  color: #2b4eff;
+  color: var(--primary);
   margin-bottom: 20px;
 }
 
-/* ======= Formulário ======= */
+header nav {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+header nav button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background: var(--primary);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+header nav button:hover {
+  background: var(--btn-hover);
+}
+
 form {
   display: flex;
   gap: 10px;
@@ -23,41 +52,35 @@ form {
   padding: 15px;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  flex-wrap: wrap;
 }
 
-input {
+input, select {
   flex: 1;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 8px;
   outline: none;
   font-size: 14px;
-  transition: 0.3s;
 }
 
-input:focus {
-  border-color: #2b4eff;
-  box-shadow: 0 0 5px rgba(43, 78, 255, 0.4);
+input:focus, select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 5px rgba(111,66,193,0.4);
 }
 
-button {
-  padding: 10px 15px;
-  cursor: pointer;
-  border: none;
-  border-radius: 8px;
-  background: #2b4eff;
+button[type="submit"] {
+  background: var(--primary);
   color: white;
-  font-size: 14px;
   font-weight: bold;
-  transition: 0.3s;
+  border: none;
+  border-radius: 5px;
 }
 
-button:hover {
-  background: #1d37cc;
-  transform: scale(1.05);
+button[type="submit"]:hover {
+  background: var(--primary-dark);
 }
 
-/* ======= Lista de Tarefas ======= */
 ul {
   list-style: none;
   padding: 0;
@@ -72,27 +95,15 @@ li {
   align-items: center;
   border-radius: 10px;
   box-shadow: 0 3px 8px rgba(0,0,0,0.05);
-  transition: 0.3s;
 }
 
-li:hover {
-  transform: scale(1.02);
-}
-
-/* ======= Ações ======= */
 .actions button {
   margin-left: 5px;
   padding: 6px 10px;
   font-size: 12px;
   border-radius: 6px;
-  background: #eaeaea;
-  color: #333;
   border: none;
   transition: 0.3s;
-}
-
-.actions button:hover {
-  background: #ccc;
 }
 
 .actions button:first-child {
@@ -100,15 +111,11 @@ li:hover {
   color: #fff;
 }
 
-.actions button:first-child:hover {
-  background: #e0a800;
-}
-
 .actions button:last-child {
   background: #dc3545;
   color: #fff;
 }
 
-.actions button:last-child:hover {
-  background: #b52a37;
+.hidden {
+  display: none;
 }

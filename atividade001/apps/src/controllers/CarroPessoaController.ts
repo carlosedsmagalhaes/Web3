@@ -6,6 +6,9 @@ const prisma = new PrismaClient();
 class CarroPessoaController {
   createPessoaCarro = async (req: Request, res: Response) => {
     const { pessoaId, carroId } = req.body;
+    const pessoaIdInt: number = Number(pessoaId);
+    const carroIdInt: number = Number(carroId);
+    console.log("Rota createPessoaCarro chamada com:", { pessoaId, carroId });
     try {
       if (!pessoaId || !carroId) {
         return res
@@ -13,10 +16,18 @@ class CarroPessoaController {
           .json({ error: "ID da pessoa e do carro são obrigatórios" });
       }
 
+      const existente = await prisma.pessoaPorCarro.findFirst({
+      where: { pessoaId: pessoaIdInt, carroId: carroIdInt },
+      });
+
+      if (existente) {
+        return res.status(400).json({ error: "Essa pessoa já está associada a esse carro" });
+      }
+
       const carroPessoa = await prisma.pessoaPorCarro.create({
         data: {
-          pessoaId,
-          carroId,
+          pessoaId: pessoaIdInt,
+          carroId: carroIdInt,
         },
       });
 
